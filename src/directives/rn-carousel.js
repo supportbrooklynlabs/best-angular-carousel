@@ -217,6 +217,7 @@
                             mouseUpBound = false,
                             locked = false;
 
+
                         $swipe.bind(iElement, {
                             start: swipeStart,
                             move: swipeMove,
@@ -265,6 +266,10 @@
                             }
                             goToSlide(index, slideOptions);
                         };
+
+                        setInterval(function(){
+                          scope.nextSlide();
+                        }, 2000);
 
                         function goToSlide(index, slideOptions) {
                             //console.log('goToSlide', arguments);

@@ -296,6 +296,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                             mouseUpBound = false,
                             locked = false;
 
+
                         $swipe.bind(iElement, {
                             start: swipeStart,
                             move: swipeMove,
@@ -344,6 +345,10 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                             }
                             goToSlide(index, slideOptions);
                         };
+
+                        setInterval(function(){
+                          scope.nextSlide();
+                        }, 2000);
 
                         function goToSlide(index, slideOptions) {
                             //console.log('goToSlide', arguments);
