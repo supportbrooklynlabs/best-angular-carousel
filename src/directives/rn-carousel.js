@@ -52,7 +52,8 @@
 
         return {
             has3d: detect3dSupport(),
-            transformProperty: detectTransformProperty()
+            transformProperty: detectTransformProperty(),
+            zIndex: 'z-index'
         };
 
     })
@@ -60,6 +61,8 @@
     .service('computeCarouselSlideStyle', function(DeviceCapabilities) {
         // compute transition transform properties for a given slide and global offset
         return function(slideIndex, offset, transitionType) {
+          transitionType = 'hexagon';
+            //console.log(transitionType);
             var style = {
                     display: 'inline-block'
                 },
@@ -70,7 +73,7 @@
 
             if (!DeviceCapabilities.transformProperty) {
                 // fallback to default slide if transformProperty is not available
-                style['margin-left'] = absoluteLeft + '%';
+                //style['margin-left'] = absoluteLeft + '%';
             } else {
                 if (transitionType == 'fadeAndSlide') {
                     style[DeviceCapabilities.transformProperty] = slideTransformValue;
@@ -86,8 +89,8 @@
 
                     transformFrom = offset < (slideIndex * -100) ? 100 : 0;
                     degrees = offset < (slideIndex * -100) ? maxDegrees : -maxDegrees;
-                    style[DeviceCapabilities.transformProperty] = slideTransformValue + ' ' + 'rotateY(' + degrees + 'deg)';
-                    style[DeviceCapabilities.transformProperty + '-origin'] = transformFrom + '% 50%';
+                    style[DeviceCapabilities.transformProperty] = 'translate3d(0px,' + degrees + '%,' + -2*Math.abs(degrees) + 'px) rotateY(0deg)'; //slideTransformValue + ' ' + 'rotateY(' + degrees + 'deg)';
+                    style[DeviceCapabilities.zIndex] = parseInt(1000-Math.abs(degrees));
                 } else if (transitionType == 'zoom') {
                     style[DeviceCapabilities.transformProperty] = slideTransformValue;
                     var scale = 1;

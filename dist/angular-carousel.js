@@ -1,6 +1,6 @@
 /**
  * Angular Carousel - Mobile friendly touch carousel for AngularJS
- * @version v0.3.10 - 2015-02-11
+ * @version v0.3.10 - 2015-04-17
  * @link http://revolunet.github.com/angular-carousel
  * @author Julien Bouquillon <julien@revolunet.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -131,7 +131,8 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
 
         return {
             has3d: detect3dSupport(),
-            transformProperty: detectTransformProperty()
+            transformProperty: detectTransformProperty(),
+            zIndex: 'z-index'
         };
 
     })
@@ -139,6 +140,8 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
     .service('computeCarouselSlideStyle', ["DeviceCapabilities", function(DeviceCapabilities) {
         // compute transition transform properties for a given slide and global offset
         return function(slideIndex, offset, transitionType) {
+          transitionType = 'hexagon';
+            //console.log(transitionType);
             var style = {
                     display: 'inline-block'
                 },
@@ -149,7 +152,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
 
             if (!DeviceCapabilities.transformProperty) {
                 // fallback to default slide if transformProperty is not available
-                style['margin-left'] = absoluteLeft + '%';
+                //style['margin-left'] = absoluteLeft + '%';
             } else {
                 if (transitionType == 'fadeAndSlide') {
                     style[DeviceCapabilities.transformProperty] = slideTransformValue;
@@ -165,8 +168,8 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
 
                     transformFrom = offset < (slideIndex * -100) ? 100 : 0;
                     degrees = offset < (slideIndex * -100) ? maxDegrees : -maxDegrees;
-                    style[DeviceCapabilities.transformProperty] = slideTransformValue + ' ' + 'rotateY(' + degrees + 'deg)';
-                    style[DeviceCapabilities.transformProperty + '-origin'] = transformFrom + '% 50%';
+                    style[DeviceCapabilities.transformProperty] = 'translate3d(0px,' + degrees + '%,' + -2*Math.abs(degrees) + 'px) rotateY(0deg)'; //slideTransformValue + ' ' + 'rotateY(' + degrees + 'deg)';
+                    style[DeviceCapabilities.zIndex] = parseInt(1000-Math.abs(degrees));
                 } else if (transitionType == 'zoom') {
                     style[DeviceCapabilities.transformProperty] = slideTransformValue;
                     var scale = 1;
@@ -485,7 +488,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                                 scope.$parent.$watch(indexModel, function(newValue, oldValue) {
 
                                     if (newValue !== undefined && newValue !== null) {
-                                        if (currentSlides && newValue >= currentSlides.length) {
+                                        if (currentSlides && currentSlides.length > 0 && newValue >= currentSlides.length) {
                                             newValue = currentSlides.length - 1;
                                             updateParentIndex(newValue);
                                         } else if (currentSlides && newValue < 0) {
