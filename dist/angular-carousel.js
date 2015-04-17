@@ -13,12 +13,12 @@ http://github.com/revolunet/angular-carousel
 
 */
 
-angular.module('angular-carousel', [
+angular.module('best-angular-carousel', [
     'ngTouch',
     'angular-carousel.shifty'
 ]);
 
-angular.module('angular-carousel')
+angular.module('best-angular-carousel')
 
 .directive('rnCarouselAutoSlide', ['$interval', function($interval) {
   return {
@@ -50,7 +50,7 @@ angular.module('angular-carousel')
   };
 }]);
 
-angular.module('angular-carousel')
+angular.module('best-angular-carousel')
 
 .directive('rnCarouselIndicators', ['$parse', function($parse) {
   return {
@@ -80,7 +80,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
 (function() {
     "use strict";
 
-    angular.module('angular-carousel')
+    angular.module('best-angular-carousel')
 
     .service('DeviceCapabilities', function() {
 
@@ -657,7 +657,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
 
 
 
-angular.module('angular-carousel.shifty', [])
+angular.module('best-angular-carousel.shifty', [])
 
 .factory('Tweenable', function() {
 
@@ -2064,7 +2064,7 @@ angular.module('angular-carousel.shifty', [])
 (function() {
     "use strict";
 
-    angular.module('angular-carousel')
+    angular.module('best-angular-carousel')
 
     .filter('carouselSlice', function() {
         return function(collection, start, size) {

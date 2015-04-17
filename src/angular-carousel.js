@@ -6,7 +6,7 @@ http://github.com/revolunet/angular-carousel
 
 */
 
-angular.module('angular-carousel', [
+angular.module('best-angular-carousel', [
     'ngTouch',
     'angular-carousel.shifty'
 ]);

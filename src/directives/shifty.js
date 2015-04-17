@@ -1,6 +1,6 @@
 
 
-angular.module('angular-carousel.shifty', [])
+angular.module('best-angular-carousel.shifty', [])
 
 .factory('Tweenable', function() {
 

@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    angular.module('angular-carousel')
+    angular.module('best-angular-carousel')
 
     .service('DeviceCapabilities', function() {
 
